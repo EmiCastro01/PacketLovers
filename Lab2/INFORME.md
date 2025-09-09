@@ -244,6 +244,6 @@ En síntesis, la trazabilidad de dispositivos es un fenómeno multicapas: mientr
 
 ## Referencias
 
-[1] https://openstax.org/books/f%C3%ADsica-universitar
-
-
+[1] https://openstax.org/books/f%C3%ADsica-universitaria-volumen-1/pages/17-7-el-efecto-doppler  
+[2] https://www.bbc.com/mundo/noticias-63007583  
+[3] [Stallings - Comunicaciones y Redes de Computadores 7ed](https://drive.google.com/file/d/14wtpr0_eigALENVraeLnF5faYEM4aQB9/view?usp=drive_link)  
