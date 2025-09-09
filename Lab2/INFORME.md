@@ -34,7 +34,7 @@ La transmisión de información en sistemas de comunicación digital está sujet
 Considerando la siguiente figura:
 
 <p align="center">
-<img width="911" height="292" alt="image" src="https://github.com/user-attachments/assets/ebec1a72-1123-451e-b10c-1de7d02661fd" />
+<img width="803" height="241" alt="imagenpto1" src="https://github.com/user-attachments/assets/49110fa3-c665-47ce-97e8-1de2b132c24b" />
 </p>
 
 **a)**
@@ -66,7 +66,7 @@ Si bien el efecto Doppler está presente debido al movimiento del avión y puede
 Considerando la siguiente figura:
 
 <p align="center">
-<img width="934" height="256" alt="image" src="https://github.com/user-attachments/assets/c8431ecd-93e1-4bb8-8aa5-cdf2008eb8d2" />
+<img width="746" height="207" alt="imagenpunto2" src="https://github.com/user-attachments/assets/6d0c9a79-42c6-42bb-9719-0155aaac89d2" />
 </p>
 
 El fenómeno físico representado corresponde a interferencia electromagnética (EMI), más específicamente ruido impulsivo. Este tipo de ruido se caracteriza por ser de alta intensidad y corta duración, apareciendo de manera súbita sobre la señal y afectando temporalmente su transmisión. A diferencia de otros ruidos, como el térmico o de fondo, el ruido impulsivo no presenta periodicidad ni constancia, manifestándose mediante picos breves que pueden alterar la recepción de señales en sistemas de comunicación.
@@ -164,25 +164,25 @@ Actualmente, la mayoría de los dispositivos modernos implementan auto MDI/MDIX,
 El primer paso fue identificar la puerta de enlace predeterminada (gateway) de la red. Para eso, desde Linux en la terminal se usó el comando `ip route`. 
 
 <p align="center">
-<img width="550" height="52" alt="image" src="https://github.com/user-attachments/assets/472d743c-b6e8-4167-9b3b-a8cd13aed74d" />
+<img width="550" height="52" alt="capturaiproute" src="https://github.com/user-attachments/assets/774df845-009b-4a9d-a6d1-f3f5d2513ead" />
 </p>
 
 Conociendo esa dirección, se abrió wireshark en la interfaz de red activa y se aplicó un filtro para capturar únicamente en el tráfico con el gateway: `ip.addr == 192.168.1.1.` Configurado eso, se generó un `ping -c 4 192.168.1.1`
 
 <p align="center">
-<img width="500" height="190" alt="image" src="https://github.com/user-attachments/assets/c3d943ab-bd31-41f1-9ee5-d6e540107434" />
+ <img width="500" height="190" alt="imagenping3c" src="https://github.com/user-attachments/assets/3c8708c8-214c-48eb-ae28-430df8dc7f53" />
 </p>
 
 Mientras el ping estaba en curso, se capturó en tiempo real los paquetes ICMP. En la lista pueden observarse las solicitudes (Echo Request) enviadas desde la PC (192.168.1.3) hacia el router (192.168.1.1) y las respuestas (Echo Reply) correspondientes.
 
 <p align="center">
-<img width="1222" height="439" alt="captura3" src="https://github.com/user-attachments/assets/e13cc926-b438-4d09-9898-ce3d11799892" />
+<img width="1220" height="170" alt="imagenwhiresharkping3c" src="https://github.com/user-attachments/assets/2286c132-d50e-4cfd-8c0a-a298047e12f8" />
 </p>
 
 Finalmente, se seleccionó uno de los paquetes para analizarlo en detalle. En este caso se tomó un Echo Request, cuyo contenido en hexadecimal es el siguiente:
 
 <p align="center">
-<img width="436" height="113" alt="image" src="https://github.com/user-attachments/assets/b88e95a2-c979-4388-b109-238599d5cd8a" />
+<img width="427" height="107" alt="imagenpaquetehex3c" src="https://github.com/user-attachments/assets/25ce548e-0074-49e0-ae4e-7a124818c660" />
 </p>
 
 **d)**
@@ -205,7 +205,7 @@ Para este ejercicio, se utilizó la IP pública de un compañero: `191.97.218.14
 Desde la terminal se ejecutó el comando `-ping -c 4 191.97.218.143` y mediante Wireshark se registraron los paquetes enviados y sus respectivas respuestas, sin pérdidas. 
 
 <p align="center">
-<img width="1146" height="308" alt="image" src="https://github.com/user-attachments/assets/4e97bdb3-bbb9-4744-89c2-95654295cf9f" />
+<img width="1151" height="320" alt="imagenwiresharkping3e" src="https://github.com/user-attachments/assets/14a8bfee-2f40-4e53-b97e-7b8fd1adfe08" />
 </p>
 
 Se seleccionó un paquete reply para analizar su formato hexadecimal. Donde el encabezado Ethernet indicó:
@@ -219,5 +219,31 @@ Nuevamente en [macaddress.io](https://macaddress.io) se consultó la dirección 
 - **Dirección**: _4F, 90, Chien 1 Road, New Taipei City, Taiwan 23585_
 
 En este caso, la comunicación se realizó de forma remota utilizando la IP pública de un compañero, ya que los equipos no se encuentran en el mismo dominio local. La dirección MAC observada durante el ping no corresponde ni al dispositivo del compañero ni al router de su red, dado que las direcciones MAC no se transmiten más allá del dominio de enlace local. Esto demuestra que, en comunicaciones a través de Internet, la MAC permanece oculta y únicamente la IP pública del router actúa como identificador visible, confirmando que la trazabilidad de la MAC se limita al ámbito de la red local.
+
+### **4)**
+
+- **Privacidad de un dispositivo en la red y trazabilidad de dirección MAC**
+
+En la actualidad, la privacidad de los dispositivos en la red se encuentra en constante riesgo debido a la trazabilidad, entendida como la capacidad de rastrear un equipo mediante sus identificadores únicos. Este fenómeno se presenta tanto a escala global de Internet como en entornos locales, comprometiendo la confidencialidad de los usuarios.
+
+En la capa de red (Capa 3 del modelo OSI), la dirección IP constituye el principal vector de trazabilidad. Los Proveedores de Servicios de Internet (ISP) asignan estas direcciones y mantienen registros que permiten asociar el tráfico con una ubicación geográfica o un suscriptor específico. Incluso si la IP cambia, la persistencia de los registros de conexión posibilita reconstruir la actividad de un usuario. Si bien el cifrado extremo a extremo protege el contenido de las comunicaciones, los metadatos asociados —direcciones IP de origen y destino, tiempos de conexión y volumen de tráfico— permanecen visibles y representan un canal efectivo de seguimiento.
+
+En la capa de enlace de datos (Capa 2), la dirección MAC (Media Access Control) cumple un rol crítico en la trazabilidad dentro de redes locales. Su carácter único permite identificar dispositivos en un dominio de broadcast, facilitando inventario, control de acceso y monitoreo de actividad. Aunque no se transmite más allá del router, su persistencia habilita la construcción de perfiles en entornos LAN. Existen técnicas como la aleatorización de MAC o el MAC spoofing que buscan mitigar este riesgo, aunque no eliminan la posibilidad de correlación con otros identificadores o patrones de tráfico.
+
+- **IMEI y MAC**
+
+De manera análoga, en el ámbito de la telefonía móvil, el IMEI (International Mobile Equipment Identity) es un identificador único asignado a cada dispositivo. Su función es permitir la gestión y control por parte de los operadores, incluyendo la capacidad de bloquear terminales en caso de robo o pérdida. Tanto el IMEI como la dirección MAC son identificadores persistentes que posibilitan la trazabilidad, aunque en dominios distintos: el primero en redes móviles y el segundo en redes locales de datos.
+
+- **¿Una VPN oculta la dirección MAC?**
+
+Por su parte, una VPN (Virtual Private Network) no oculta la dirección MAC, que sigue siendo visible dentro de la red local, pero sí protege la privacidad en la capa de red al ocultar la dirección IP pública y cifrar el tráfico en tránsito por Internet. De esta forma, evita que sitios web, servicios en línea o posibles interceptores externos asocien directamente la actividad del usuario con su ubicación geográfica.
+
+
+En síntesis, la trazabilidad de dispositivos es un fenómeno multicapas: mientras que la dirección IP permite la asociación entre usuarios y ubicaciones a escala global, la dirección MAC lo hace a nivel local, y el IMEI en redes móviles. En todos los casos, aunque el contenido pueda cifrarse, los metadatos continúan expuestos y constituyen la base del seguimiento. La protección efectiva de la privacidad requiere combinar técnicas de ofuscación (MAC aleatoria, MAC spoofing, direcciones IPv6 temporales, VPN, DNS cifrado) con políticas de seguridad y retención mínima de datos, reduciendo así la posibilidad de rastreo y perfilado de los usuarios.
+
+
+## Referencias
+
+[1] https://openstax.org/books/f%C3%ADsica-universitar
 
 
