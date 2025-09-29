@@ -64,7 +64,10 @@ Además, mantener dispositivos antiguos conectados puede obligar al AP a operar 
 ### 2)
 
 En base a la siguiente Figura:
-[figura de la fibra SMF y MMF]
+
+<p align="center">
+<img width="499" height="100" alt="image" src="https://github.com/user-attachments/assets/551889df-0407-4d64-b532-187743d94e7b" />
+</p>
 
 **a)**
 Los tipos de transmisión ilustrados en la figura son: la Fibra Óptica Monomodo (SMF, Single Mode Fiber) y la Fibra Óptica Multimodo (MMF, Multi Mode Fiber).
@@ -80,7 +83,11 @@ La Fibra Óptica Monomodo (SMF) es más costosa de implementar que la Multimodo:
 
 **b)**
 La Ley de Snell establece que al propagarse un rayo de luz entre dos medios con diferentes índices de refracción n1 y n2, los ángulos de incidencia (θ1) y refracción (θ2) están relacionados mediante la expresión:
-n1sin(θ1)=n2sin(θ2)
+
+<p align="center">
+n1 sin(θ1) = n2 sin(θ2)
+</p>
+
 En el contexto de la fibra óptica, el núcleo presenta un índice de refracción n1 mayor que el del revestimiento n2. Esta diferencia permite que, para ángulos de incidencia superiores al ángulo crítico, se produzca reflexión total interna en la interfaz núcleo-revestimiento, fenómeno que garantiza que la luz permanezca confinada dentro del núcleo durante su propagación, minimizando pérdidas y atenuación.
 - En fibra de modo único (single-mode), el diámetro reducido del núcleo limita la propagación de la luz a una única trayectoria que cumpla la condición de reflexión total interna. La Ley de Snell determina el ángulo crítico que permite que este único modo se mantenga estable, evitando interferencias entre trayectorias.
 - En fibra multimodo (multimode), el mayor diámetro del núcleo admite múltiples ángulos de incidencia que satisfacen la condición de reflexión total interna, posibilitando la propagación simultánea de varios modos. Cada modo corresponde a un ángulo distinto dentro de los límites establecidos por la Ley de Snell, lo que genera múltiples trayectorias de luz dentro del núcleo.
@@ -113,7 +120,10 @@ En la práctica, las redes modernas combinan ambos enfoques: la fibra garantiza 
 
 
 **b)**
-[imagen gráfico comparacion]
+
+<p align="center">
+<img width="650" height="381" alt="image" src="https://github.com/user-attachments/assets/c95bf077-92fd-4603-8583-4829cab92c55" />
+</p>
 
 **c)**
 
@@ -131,7 +141,11 @@ En la práctica, las redes modernas combinan ambos enfoques: la fibra garantiza 
 Existen dos tecnologías principales que permiten la conexión a internet y la comunicación con tierra desde una avión.
 - Air-to-Ground (A2G): Esta tecnología proporciona conectividad del vehículo aéreo con la red terrestre mediante estaciones base en la tierra. Estas estaciones reciben y transmiten datos a la aeronave y viceversa.
 El avión o dron detecta el área de cobertura donde se encuentra y puede comunicarse con el sistema de antenas terrestres como lo muestra la figura siguiente:
-[imagen A2G]
+
+<p align="center">
+<img width="539" height="241" alt="image" src="https://github.com/user-attachments/assets/2460fac4-317d-497b-9ca0-c2157a5ef74a" />
+</p>
+
 La arquitectura del sistema está compuesta por tres bloques: las Estaciones de Aeroneave, Estaciones Terrestres (base), y la Core Network que puede ser Internet, o alguna red específica, conectadas por backhaul que depende de la tecnología de A2G.
 Las estaciones de aeronave son un receptor y transmisor y receptor de radio, y un sistema de red local que gestiona los sistemas de entretenimiento a bordo. Las estaciones terrestres son torres de comunicación, similares a las celulares, con la diferencia de que sus transmisores se dirigen hacia arriba y se ubican a distancias mucho mayores (entre 50Km y 150Km).
 La tecnología A2G está actualmente en constante evolución. Un ejemplo de esto es la problemática de A2G basado en LTE en relación a la velocidad de las aeronaves (efecto doppler) al intentar usar antenas LTE para el sistema, ya que las subportadoras de LTE tienen frecuencias muy cercanas y el efecto doppler causado por la alta velocidad del avión genera un corrimiento en la frecuencia que induce errores en la comunicación. 
@@ -140,15 +154,23 @@ Esta tecnología tiene como ventaja la velocidad de transmisión de datos, y com
 - Satelital: La tecnología satelital proporciona conectividad a bordo del avión mediante la comunicación entre el aeroneave y satélites en órbita. Existen dos principales tipos según la distancia de satélites: Geoestacionarios (GEO), ubicados a unos 36.000Km de la Tierra, ofrecen cobertura amplia con antenas de gran potencia pero latencia alta por la distancia. Y los satélites de Órbita Baja (LEO) operan entre 500 y 2.000 km de altura. Presentan menor latencia que los GEO pero requieren una estructura de varios cientos o miles de satélites.
 	La arquitectura está formada por La estación de aeronave, Enlace Satelital, Gateway terrestre y Core Network 	mediante backhaul. Cuando la estación de aeronave transmite mediante el enlace satelital, el satélite 	    retransmite a una estación en tierra.
 Las ventaja de este sistema es la cobertura global, sin importar el terreno (océanos, zonas polares, etc.) y la desventaja es la complejidad del sistema y la latencia.
-[imagen satelital]
+
+<p align="center">
+<img width="343" height="314" alt="image" src="https://github.com/user-attachments/assets/9cd4151f-639b-4e29-9d64-b448a578cd4d" />
+</p>
 
 **b)**
 En el siguiente paper publicado el 27 de Agosto de 2025 se aborda el tema de la calidad de un sistema A2G donde hay múltiples usuarios, múltiples antenas, y se utiliza NOMA (Non Orthogonal Multiple Access). En este contexto, se compara la calidad con respecto a la utilización de OMA. 
 La diferencia entre ambos estándares es la forma en la que los usuarios (aeronaves en este caso) interactúan con los paquetes. En un sistema basado en OMA, los usuarios distinguen sus señales por cambios de frecuencia, tiempo y código. En un sistema NOMA, todos los usuarios reciben la misma señal, pero a diferentes potencias, dependiendo de la distancia o “debilidad” del canal.
-(https://arxiv.org/pdf/2508.20003)[Paper]
+https://arxiv.org/pdf/2508.20003[Paper]
 
 **c)**
 Aunque al usuario le parezca que interactúa con una única red, en realidad en el avión hay dos redes, que pueden ser separadas virtualmente: la LAN, con un servidor dedicado que hostea todos los servicios a bordo, y la WAN mediante A2G o satélite (como se vió en los incisos anteriores) que ofrece conectividad a internet. Esta última es limitada en ancho de banda y velocidad, y el proveedor suele cobrar el acceso y limita el volumen de datos.
 Para dividir el flujo de los datos se utiliza segmentación y ruteo: el servidor dedicado se encuentra en la red local y utiliza una IP privada accesible por los usuarios, y un gateway para el flujo hacia afuera (internet).
 Para que se respete la política de esta división, se suele utilizar un portal cautivo que redirige todo el tráfico a una dirección de autenticación, donde el usuario debe pagar o solo usar la red local para acceder al contenido.
 El portal cautivo puede ser implementado en el servidor dedicado o en un firewall que controle el acceso a la WAN. En este último caso, el firewall inspecciona los paquetes y bloquea cualquier intento de acceder a internet sin autenticación previa.
+
+### Referencias
+
+[1] <https://pxcom.aero/atg-connectivity-tech-challenging-satellite-dominance/>
+[2] <https://tec.gov.in/public/pdf/Studypaper/DA2GC_Paper%2008-10-2020%20v2.pdf?utm_source=chatgpt.com>
