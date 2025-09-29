@@ -50,7 +50,7 @@ Por otra parte, el estándar IEEE 802.11 fue publicado en 1997 como respuesta a 
 
 Para determinar el protocolo 802.11 que utiliza la red de la facultad, se realizaron los siguientes procedimientos:
 1. _En MacOS_
-Con la tecla `option` presionada, se hizo click en el botón de redes inalámrbicas en la barra superior. Conectada a la red **unc-libre**, se obtuvo la siguiente información
+Con la tecla `option` presionada, se hizo click en el botón de redes inalámbricas en la barra superior. Conectada a la red **unc-libre**, se obtuvo la siguiente información
 
 <p align="center">
 	<img width="250" heigh="50" src="https://github.com/user-attachments/assets/b5cdfeb3-a68c-4bf0-b357-b34842262f40" />
@@ -77,9 +77,8 @@ Connected to 58:c1:7a:29:56:81 (on wlp1s0f0)
 	dtim period: 1
 	beacon int: 100
 ```
-De lo que no se puede establecer específicamente a que protocolo pertenece, pero si se puede deducir que es 802.11n ó 802.11.ac (que sería coherente con la prueba 1) por el _bitrate_ y la frecuencia de 5GHz soportada por ambos estándares.
-Para salvar la duda:
-
+No es posible determinar con precisión a qué protocolo pertenece, aunque por el *bitrate* y la *frecuencia* de 5 GHz soportada, puede deducirse que se trata de 802.11n o 802.11ac (lo cual resulta coherente con lo observado en la primer prueba).  
+Para despejar la duda:
 ```
 sudo iw dev wlp1s0f0 scan | grep -E "(VHT|HT|HE)" | head -20
 ```
@@ -107,7 +106,8 @@ Que lista las capacidades de los protocolos de las redes (scan).
 			RX HT20 SGI
 ```
 Donde se puede observar que el AP tiene capacidades de VHT (802.11ac), pero en la línea de VHT TX y RX se muestra que no se está operando en este protocolo.
-Investigando, se concluyó que hay un problema con el driver en Asahi, y hace un _fallback_ a 802.11n, donde se establece.
+> [!Important]  
+> El análisis mostró que existe un problema con el driver en Asahi, lo que provoca un *fallback* a 802.11n.
 
 **c)**
 Cuando una red Wi-Fi opera bajo un determinado protocolo de la familia IEEE 802.11 (por ejemplo, 802.11ac o 802.11ax), la capacidad de un dispositivo para conectarse dependerá de la compatibilidad de su interfaz de red inalámbrica (NIC) con dicho protocolo. En el caso de dispositivos más antiguos, cuyas NIC solo soporten versiones previas (por ejemplo, 802.11g o 802.11n), existen dos escenarios principales:
@@ -121,7 +121,9 @@ Si el punto de acceso solo admite el protocolo más reciente, la NIC antigua no 
 Desde el punto de vista ingenieril, esto refleja la evolución de las capas física (PHY) y de enlace de datos (MAC) en IEEE 802.11. Cuando se habilita compatibilidad descendente, los AP operan en modos mixtos, introduciendo cierta ineficiencia espectral debido al overhead necesario para interoperar con dispositivos antiguos.
 
 **d)**
-La versión del protocolo Wi‑Fi utilizada en una red está directamente relacionada con su nivel de seguridad, ya que cada estándar incorpora mejoras en autenticación y cifrado. Protocolos antiguos como 802.11b/g/n (Wi‑Fi 4) emplean mecanismos vulnerables como WEP o WPA, mientras que versiones más modernas como 802.11ac/ax/be (Wi‑Fi 5, 6 y 7) utilizan WPA2/WPA3, cifrado AES‑CCMP y protecciones frente a ataques de suplantación o descifrado de tráfico.
+La versión del protocolo Wi‑Fi de una red influye en las posibles mejoras de seguridad, ya que cada estándar incorpora avances en autenticación y cifrado. Por ejemplo, protocolos antiguos como 802.11b/g/n (Wi‑Fi 4) suelen usar mecanismos vulnerables como WEP o WPA, mientras que versiones más modernas como 802.11ac/ax/be (Wi‑Fi 5, 6 y 7) soportan WPA2/WPA3, cifrado AES‑CCMP y protecciones frente a ataques de suplantación o descifrado de tráfico.
+
+Sin embargo, si una red se configura como abierta, sin habilitar ningún método de autenticación o cifrado, la versión del protocolo no aporta seguridad: aunque sea Wi‑Fi 7, el tráfico viajará en texto claro y será vulnerable a interceptaciones. En otras palabras, el protocolo moderno solo protege si se utiliza junto con las medidas de seguridad adecuadas.
 
 Además, mantener dispositivos antiguos conectados puede obligar al AP a operar en modos de compatibilidad descendente, limitando el uso de las funciones de seguridad más avanzadas. Por ello, actualizar APs y clientes a estándares recientes no solo mejora el rendimiento, sino también la robustez de la red frente a intrusiones.
 
@@ -158,8 +160,7 @@ Con este comando se listan, entre otros datos, la información acerca de la segu
         02:EC:DA:8B:F3:A5  unc-libre                   Infra  48    405 Mbit/s  14      ▂___  --  
 ```
 
-La última columna explicita la seguridad. Como se puede observar, no está exlplícito, lo que no se pudo determinar si es un problema grave de la configuración de la red, o del controlador. 
-En contraste con la imagen de la prueba en MacOS, se puede observar que la fila de "Seguridad" está vacía, por lo que concluimos que la red oculta su sistema de seguridad al escaneo.
+La última columna explicita la seguridad. Como se puede observar, no está especificada, lo que indica que se trata de una red abierta sin cifrado. Esto implica que las transmisiones viajan en texto claro —como contraseñas de servicios sin HTTPS, mensajes de chat sin cifrar o archivos transferidos—, por lo que la red es insegura.
 
 **e)**
 |              |    Wi-Fi 5   |   Wi-Fi 6    |   Wi-Fi 7    |
