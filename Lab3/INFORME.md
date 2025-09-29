@@ -8,18 +8,34 @@
 
 **PacketLovers**
 
-**Universidad Nacional de Córdoba**
-**Facultad de Ciencias Exactas, Físicas y Naturales**
+**Universidad Nacional de Córdoba**  
+**Facultad de Ciencias Exactas, Físicas y Naturales**  
 
-**Materia**: _Comunicaicones de Datos_
+**Materia**: _Comunicaciones de Datos_  
 **Profesores**: _Miguel A. Solinas_, _Santiago M. Henn_, _Facundo O. Cuneo_  
 **Fecha**: 29/09/2025
 
+---
+
 ## Resumen 
 
-En el presente informe se abordan los temas relacionados con la estandarización y noralización de las tecnologías utilizadas en la capa Física del model OSI, pasando por el detalle de protocolos y compatibilidades. Se incluyen diagramas y tablas para ilustrar conceptos clave y facilitar la comprensión. También se realizan prácticas con la red de la facultad para determinar la seguridad y protocolos que se utilizan en el establecimiento. Se analizan los medios de transmisión de datos como la fibra óptica, indagando en la ley física que rige su funcionamiento y las ventajas que ofrece en comparación con otros medios similares. Finalmente, se aborda un tema particular: la conexión a internet en aviones.
+En este trabajo se analizan distintos estándares y tecnologías de comunicaciones de datos. Se abordan los orígenes y evolución de IEEE 802.3 (Ethernet) y IEEE 802.11 (Wi-Fi), considerando compatibilidad, seguridad y aplicaciones actuales. También se estudian las fibras ópticas monomodo y multimodo, con énfasis en la dispersión modal, la Ley de Snell y los costos asociados a su implementación. Se comparan medios de transmisión alámbricos e inalámbricos, junto con protocolos de comunicación como Wi-Fi, Bluetooth, ZigBee, NFC, LTE, GSM, 5G, LoRa, NB-IoT y Z-Wave.  
 
----
+En la parte práctica, se identificaron las versiones de IEEE 802.11 utilizadas en redes abiertas de la Facultad (FCEFyN, UNC-LIBRE), verificando los esquemas de seguridad implementados y contrastándolos con versiones previas. Este análisis permitió vincular la teoría con la práctica, resaltando la relación entre la evolución de los estándares y la protección efectiva de las redes inalámbricas.  
+
+Palabras clave: IEEE 802.3, IEEE 802.11, Wi-Fi 7, fibra óptica, dispersión modal, Ley de Snell, protocolos inalámbricos, seguridad de redes.  
+
+
+
+## Introducción
+
+La necesidad de transmitir información de manera rápida, segura y confiable ha impulsado la creación de múltiples estándares de comunicación, tanto alámbricos como inalámbricos. Ethernet, estandarizado en 1983 bajo IEEE 802.3, marcó el inicio de redes locales cableadas de alta capacidad, mientras que la aparición de IEEE 802.11 en 1997 permitió el desarrollo de redes inalámbricas, que con el tiempo alcanzaron tasas de transmisión y niveles de seguridad comparables a las redes cableadas.  
+
+Paralelamente, la fibra óptica se consolidó como medio físico de referencia para enlaces de alta velocidad y largas distancias, superando las limitaciones de interferencia y ancho de banda presentes en otros soportes. Al mismo tiempo, la proliferación de protocolos inalámbricos y de corto alcance (Wi-Fi, Bluetooth, ZigBee, entre otros) refleja la necesidad de soluciones adaptadas a diferentes entornos y requerimientos.  
+
+Este trabajo tiene como objetivo analizar la evolución de estas tecnologías, comparar sus características principales y aplicar los conceptos estudiados en un relevamiento práctico de redes inalámbricas disponibles en la Facultad. De esta manera, se busca establecer la relación entre la teoría y la práctica, destacando el impacto de la estandarización y la seguridad en los sistemas de comunicación actuales.  
+
+
 
 ## Desarrollo
 
@@ -170,7 +186,10 @@ Para dividir el flujo de los datos se utiliza segmentación y ruteo: el servidor
 Para que se respete la política de esta división, se suele utilizar un portal cautivo que redirige todo el tráfico a una dirección de autenticación, donde el usuario debe pagar o solo usar la red local para acceder al contenido.
 El portal cautivo puede ser implementado en el servidor dedicado o en un firewall que controle el acceso a la WAN. En este último caso, el firewall inspecciona los paquetes y bloquea cualquier intento de acceder a internet sin autenticación previa.
 
+---
+
 ### Referencias
 
-[1] <https://pxcom.aero/atg-connectivity-tech-challenging-satellite-dominance/>
-[2] <https://tec.gov.in/public/pdf/Studypaper/DA2GC_Paper%2008-10-2020%20v2.pdf?utm_source=chatgpt.com>
+[1] <https://pxcom.aero/atg-connectivity-tech-challenging-satellite-dominance/>  
+[2] <https://tec.gov.in/public/pdf/Studypaper/DA2GC_Paper%2008-10-2020%20v2.pdf/>  
+[3] [Stallings - Comunicaciones y Redes de Computadores 7ed](https://drive.google.com/file/d/14wtpr0_eigALENVraeLnF5faYEM4aQB9/view?usp=drive_link)  
