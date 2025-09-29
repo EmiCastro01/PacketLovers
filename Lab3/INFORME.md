@@ -47,7 +47,67 @@ El estándar IEEE 802.3, publicado por primera vez en 1983, estableció las base
 Por otra parte, el estándar IEEE 802.11 fue publicado en 1997 como respuesta a la creciente necesidad de desarrollar redes de área local inalámbricas (WLAN). A diferencia de 802.3, este estándar emplea como medio de transmisión el espectro radioeléctrico, definiendo técnicas de modulación y protocolos de acceso al medio específicos para comunicaciones sin cables. Desde sus primeras versiones, que ofrecían velocidades limitadas y un alcance modesto, 802.11 evolucionó en distintas enmiendas como 802.11b, 802.11g, 802.11n, 802.11ac y 802.11ax (Wi-Fi 6/6E), cada una ampliando la capacidad de transmisión, la eficiencia espectral y la seguridad mediante mecanismos como WPA/WPA2/WPA3. Más recientemente, se ha publicado 802.11be (Wi-Fi 7), cuya versión definitiva fue aprobada en 2025.
 
 **b)**
-Ir a la facuuu
+
+Para determinar el protocolo 802.11 que utiliza la red de la facultad, se realizaron los siguientes procedimientos:
+1. _En MacOS_
+Con la tecla `option` presionada, se hizo click en el botón de redes inalámrbicas en la barra superior. Conectada a la red **unc-libre**, se obtuvo la siguiente información
+
+<p align="center">
+	<img width="250" heigh="50" src="https://github.com/user-attachments/assets/b5cdfeb3-a68c-4bf0-b357-b34842262f40" />
+</p>
+
+Donde se puede confirmar que el protocolo en esta red es el **802.11ac**.
+
+2. _En Fedora (Asahi)_
+
+Asahi es una distribución de Linux desarrollada para las Macbook específicamente, basada en Fedora. Para encontrar el protocolo 802.11, se realizaron los siguientes pasos:
+ ```
+sudo iw dev wlp1s0f0 link
+```
+ ```Salida
+Connected to 58:c1:7a:29:56:81 (on wlp1s0f0)
+	SSID: unc-libre
+	freq: 5300.0
+	RX: 6037511 bytes (13579 packets)
+	TX: 1405654 bytes (4047 packets)
+	signal: -48 dBm
+	rx bitrate: 360.0 MBit/s
+	tx bitrate: 324.0 MBit/s
+	bss flags: short-slot-time
+	dtim period: 1
+	beacon int: 100
+```
+De lo que no se puede establecer específicamente a que protocolo pertenece, pero si se puede deducir que es 802.11n ó 802.11.ac (que sería coherente con la prueba 1) por el _bitrate_ y la frecuencia de 5GHz soportada por ambos estándares.
+Para salvar la duda:
+
+```
+sudo iw dev wlp1s0f0 scan | grep -E "(VHT|HT|HE)" | head -20
+```
+Que lista las capacidades de los protocolos de las redes (scan).
+```Salida
+	HT capabilities:
+			HT20/HT40
+			RX HT20 SGI
+			RX HT40 SGI
+			No DSSS/CCK HT40
+		HT TX/RX MCS rate indexes supported: 0-31
+	HT operation:
+		 * HT protection: no
+	VHT capabilities:
+		VHT Capabilities (0x338061d2):
+		VHT RX MCS set:
+		VHT RX highest supported: 0 Mbps
+		VHT TX MCS set:
+		VHT TX highest supported: 0 Mbps
+		VHT extended NSS: supported
+	VHT operation:
+		 * VHT basic MCS set: 0xfffc
+	HT capabilities:
+			HT20
+			RX HT20 SGI
+```
+Donde se puede observar que el AP tiene capacidades de VHT (802.11ac), pero en la línea de VHT TX y RX se muestra que no se está operando en este protocolo.
+Investigando, se concluyó que hay un problema con el driver en Asahi, y hace un _fallback_ a 802.11n, donde se establece.
 
 **c)**
 Cuando una red Wi-Fi opera bajo un determinado protocolo de la familia IEEE 802.11 (por ejemplo, 802.11ac o 802.11ax), la capacidad de un dispositivo para conectarse dependerá de la compatibilidad de su interfaz de red inalámbrica (NIC) con dicho protocolo. En el caso de dispositivos más antiguos, cuyas NIC solo soporten versiones previas (por ejemplo, 802.11g o 802.11n), existen dos escenarios principales:
@@ -65,7 +125,41 @@ La versión del protocolo Wi‑Fi utilizada en una red está directamente relaci
 
 Además, mantener dispositivos antiguos conectados puede obligar al AP a operar en modos de compatibilidad descendente, limitando el uso de las funciones de seguridad más avanzadas. Por ello, actualizar APs y clientes a estándares recientes no solo mejora el rendimiento, sino también la robustez de la red frente a intrusiones.
 
-[] VOlver a la facuuu
+Para ver el sistema de seguridad que utilizan las redes de la facultad se siguieron los siguientes pasos:
+```
+nmcli dev wifi list | grep -E 'FCEFyN|unc-libre'
+```
+`nmcli` es una herramienta para administrar el Network Manager para Linux.
+Con este comando se listan, entre otros datos, la información acerca de la seguridad de la red. Se obtuvo (en Asahi):
+
+```Salida
+        58:C1:7A:29:56:80  FCEFyN                      Infra  60    540 Mbit/s  92      ▂▄▆█  --          
+        58:C1:7A:29:91:51  FCEFyN 2.4GHz               Infra  1     130 Mbit/s  84      ▂▄▆█  --          
+        58:C1:7A:29:91:52  unc-libre 2.4GHz            Infra  1     130 Mbit/s  84      ▂▄▆█  --          
+        58:C1:7A:29:A4:10  FCEFyN                      Infra  52    540 Mbit/s  74      ▂▄▆_  --          
+        58:C1:7A:29:A4:11  unc-libre                   Infra  52    540 Mbit/s  74      ▂▄▆_  --          
+*       58:C1:7A:29:56:81  unc-libre                   Infra  60    540 Mbit/s  74      ▂▄▆_  --          
+        58:C1:7A:29:55:40  FCEFyN                      Infra  36    540 Mbit/s  65      ▂▄▆_  --          
+        58:C1:7A:29:55:41  unc-libre                   Infra  36    540 Mbit/s  64      ▂▄▆_  --          
+        62:22:32:10:88:0A  unc-libre                   Infra  157   270 Mbit/s  40      ▂▄__  --          
+        62:22:32:20:88:0A  FCEFyN                      Infra  157   270 Mbit/s  40      ▂▄__  --          
+        7C:8B:CA:20:DE:50  FCEFyN 2                    Infra  8     130 Mbit/s  39      ▂▄__  WPA2        
+        58:C1:7A:0A:35:90  FCEFyN                      Infra  108   540 Mbit/s  34      ▂▄__  --          
+        58:C1:7A:0A:35:91  unc-libre                   Infra  108   540 Mbit/s  34      ▂▄__  --          
+        66:22:32:F7:7D:6F  unc-libre                   Infra  60    405 Mbit/s  32      ▂▄__  --          
+        6A:22:32:F7:7D:6F  FCEFyN                      Infra  60    540 Mbit/s  30      ▂___  --          
+        62:22:32:20:87:CE  FCEFyN                      Infra  44    270 Mbit/s  15      ▂___  --          
+        62:22:32:10:87:CE  unc-libre                   Infra  44    270 Mbit/s  15      ▂___  --          
+        58:C1:7A:29:55:C0  FCEFyN                      Infra  108   540 Mbit/s  15      ▂___  --          
+        58:C1:7A:29:55:C1  unc-libre                   Infra  108   540 Mbit/s  15      ▂___  --          
+        E6:38:83:9E:63:8E  unc-libre                   Infra  136   270 Mbit/s  15      ▂___  --          
+        E6:38:83:AE:63:8E  FCEFyN                      Infra  136   270 Mbit/s  15      ▂___  --          
+        06:EC:DA:8B:F3:A5  FCEFyN                      Infra  48    405 Mbit/s  14      ▂___  --          
+        02:EC:DA:8B:F3:A5  unc-libre                   Infra  48    405 Mbit/s  14      ▂___  --  
+```
+
+La última columna explicita la seguridad. Como se puede observar, no está exlplícito, lo que no se pudo determinar si es un problema grave de la configuración de la red, o del controlador. 
+En contraste con la imagen de la prueba en MacOS, se puede observar que la fila de "Seguridad" está vacía, por lo que concluimos que la red oculta su sistema de seguridad al escaneo.
 
 **e)**
 |              |    Wi-Fi 5   |   Wi-Fi 6    |   Wi-Fi 7    |
