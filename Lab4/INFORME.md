@@ -1,14 +1,14 @@
 El objetivo principal de este inciso es separar accesos mediante VLANs. Para ello se crearon las siguientes:
 
 
-- VLAN 10: Dispositivos de la clase Turista, solo acceso al servidor local.
-- VLAN 20: Dispositivos de la clase Business, acceso al servidor local y a Internet.
-- VLAN 99: PC del administrador. Acceso a todas las redes e internet.
+- **VLAN 10**: Dispositivos de la clase Turista, solo acceso al servidor local.
+- **VLAN 20**: Dispositivos de la clase Business, acceso al servidor local y a Internet.
+- **VLAN 99**: PC del administrador. Acceso a todas las redes e internet.
 
 Para la creación de este sistema, se eligió la topología sugerida:
-
-[ IMAGEN DE LA TOPOLOGIA]
-
+<p align=center>
+<img width="908" height="588" alt="Screenshot from 2025-11-16 18-15-02" src="https://github.com/user-attachments/assets/e09f6edb-727c-456a-a8b4-94116c9978b2" />
+</p>
 Para simular el ISP se utilizó un router con un Loopback a 8.8.8.8 (Simulando el servicio de DNS de Google)
 Es decir, cuando una PC Business o Administrador acceden a “internet”, se están mandando paquetes al Loopback del router ISP.
 
@@ -18,7 +18,7 @@ Se utilizaron las direcciones sugeridas.
 
 1. La conexión entre el switch SW y el router de la aeronave (R_Aircraft) se realizó con el puerto GigabitEthernet, ya que se usó un router más moderno que no tiene puerto de FastEthernet. Esto evita cuellos de botella con las salidas a internet, y prioriza la conexión principal antes que las individuales.
 
-2. Se configuraron las VLANs en el switch. Los puertos del switch (FastEthernet0/2 - 8) Se configuraron como puertos de acceso con el comando switchport mode access asignados a su VLAN, según correspondiese la clase. El puerto GigabitEthernet0/1 se configuró como troncal con el comando switchport mode trunk.
+2. Se configuraron las VLANs en el switch. Los puertos del switch (FastEthernet0/2 - 8) Se configuraron como puertos de acceso con el comando `switchport mode access` asignados a su VLAN, según correspondiese la clase. El puerto GigabitEthernet0/1 se configuró como troncal con el comando `switchport mode trunk`.
 
 3. En el Router de la aeronave (R_Aircraft) se crearon subinterfaces para cada VLAN (GigabitEthernet0/0.10-0.20-0.99) con el comando `encapsulation dot1Q [vlan]` para taggear el tráfico y siguiendo el protocolo IEEE 802.1Q. Luego se asignó la IP del gateway predeterminado a cada red.
 Se configuraron Pools de DHCP en el router para determinar las IPs a cada VLAN. Para ello se estableció que IPs no repartir (usadas para los gateways y el servidor) con `ip dhcp excluded-address [ip_gateway][ip_server]`
@@ -35,13 +35,13 @@ En el caso de la pool de Turista, el servidor dns es el mismo server local. (10.
 4. Se implementó NAT para traducir las IPs privadas de Business y Admin a la pública del router. Se utilizan access lists (ACLs) identificando el tráfico que puede salir. Para que el tráfico permitido pueda salir a Internet, era necesarios estos pasos, con los siguientes comandos:
 `access-list [nro clase] permit [ip clase] [máscara]`
 
-De esta forma, Business y Admin tienen acceso a internet utilizando la IP pública del router (200.0.0.1), aplicando el comando overload para que el grupo de esas listas utilizaran la interfaz de salida con la misma IP.
+De esta forma, Business y Admin tienen acceso a internet utilizando la IP pública del router (200.0.0.1), aplicando el comando `overload` para que el grupo de esas listas utilizaran la interfaz de salida con la misma IP.
 
-5. Se estableció que interfaces son externas (Hacia el ISP) y cuales internas (VLANs) con ip nat outside/inside.
+5. Se estableció que interfaces son externas (Hacia el ISP) y cuales internas (VLANs) con `ip nat outside/inside`.
 
 ## **Funcionamiento y Pruebas de la red**
 
-- Tabla de VLANs del switch:
+- <ins>Tabla de VLANs del switch</ins>
 ```
 
 Switch>show vlan brief
@@ -62,7 +62,7 @@ VLAN Name                             Status    Ports
 1005 trnet-default                    active
 ```
 
-- Verificaciones en el Router de la aeronave (R_Aircraft):
+- <ins>Verificaciones en el Router de la aeronave (R_Aircraft)</ins>
 
 ```
 Router#show ip interface brief
@@ -122,7 +122,7 @@ Extended IP access list 100
 Las ACLs extendidas se utilizaron para establecer el permiso del tráfico udp para los puertos del servidor y cliente DHCP para que este funcionara correctamente. Inicialmente, sin estas configuraciones, el servicio DHCP no funcionaba. También se estableció el tráfico ip que venga de la VLAN turista hacia la admin, para los pings de prueba (necesario para que el ping a turistas respondan correctamente).
 La última regla (50) es la negación al tráfico de la red turista a cualquier destino (`any`).
 
-- Ping de PC Turista al Server Local 
+- <ins>Ping de PC Turista al Server Local</ins> 
 
 ```
 C:\>ping 10.10.99.10
@@ -139,11 +139,12 @@ Ping statistics for 10.10.99.10:
 Approximate round trip times in milli-seconds:
     Minimum = 0ms, Maximum = 0ms, Average = 0ms
 ```
-- Acceso al Server Local con el Browser desde PC Turista
+- <ins>Acceso al Server Local con el Browser desde PC Turista</ins>
 
-[ IMAGEN SERVER LOCAL PC TURISTA]
-
-- Ping a Internet (`8.8.8.8`) desde PC Turista
+<p align=center>
+<img width="690" height="714" alt="Screenshot from 2025-11-16 17-38-48" src="https://github.com/user-attachments/assets/9e7f79aa-21e6-4dae-b14e-f8d8478c9fa0" />
+</p>
+- <ins>Ping a Internet (`8.8.8.8`) desde PC Turista</ins>
 
 ```
 C:\>ping 8.8.8.8
@@ -159,11 +160,12 @@ Ping statistics for 8.8.8.8:
     Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
 ```
 
-- Acceso al server local con el Browser web (desde Business)
+- <ins>Acceso al server local con el Browser web (desde Business)</ins>
+<p align=center>
+<img width="690" height="714" alt="Screenshot from 2025-11-16 17-41-15" src="https://github.com/user-attachments/assets/1ee52b84-e961-42f7-902f-1ed9a0ee8d32" />
+</p>
 
-[IMAGEN SERVER LOCAL PC BUSINESS]
-
-- Ping y tracert Internet (`8.8.8.8`) desde PC Business
+- <ins>Ping y tracert Internet (`8.8.8.8`) desde PC Business</ins>
 
 ```
 C:\>ping 8.8.8.8
@@ -191,7 +193,7 @@ Trace complete.
 ```
 Observar como el paquete pasa por el gateway de la red Business.
 
-- Ping desde Admin a todas las redes 
+- <ins>Ping desde Admin a todas las redes</ins> 
 
 ```
 C:\>ping 10.10.10.11
