@@ -97,71 +97,72 @@ Gracias al tagging, las VLAN pueden coexistir en la misma infraestructura preser
 ### 2)  Considerando la siguiente topología en Packet-Tracer:
 
 <p align="center">
-<img width="562" height="106" alt="imagen1" src="https://github.com/user-attachments/assets/c2fea5b3-1601-4f29-acf0-e3a5b19c09b5" />
+<img width="562" height="106" alt="imagen1" src="https://github.com/user-attachments/assets/a34b5a75-afed-4ffb-8a6b-6adbbf8f2573" />
 </p>
 
 ### **a)**
 Se cambió el nombre de cada switch usando el comando hostname, con el fin de identificarlos facilmente durante las configuraciones:
 
 <p align="center">
-<img width="944" height="92" alt="imagen2" src="https://github.com/user-attachments/assets/d6c1dc33-f8d2-45fc-9482-3c0058259cc1" />
+<img width="944" height="92" alt="imagen2" src="https://github.com/user-attachments/assets/9ec6f47e-22ff-4376-b21c-826ef1f792ee" />
 </p>
 
 ### **b)**
 Se definieron las contraseñas de modo privilegiado, consola y vty, con el objetivo de proteger el acceso de cada switch y garantizar que solo usuarios autorizados puedan realizar configuraciones.
 
 <p align="center">
-<img width="743" height="193" alt="imagen 3" src="https://github.com/user-attachments/assets/77e3c07c-2f07-44e5-be91-22a00c089e27" />
+<img width="743" height="193" alt="imagen3" src="https://github.com/user-attachments/assets/adad1a06-9611-4e4f-965d-b63d5904441f" />
 </p>
 
 ### **c)**
 Se encriptaron las contraseñas configuradas.
 
 <p align="center">
-<img width="788" height="41" alt="imagen4" src="https://github.com/user-attachments/assets/d0e41c12-82aa-4eef-871e-5336cca28e66" />
+<img width="788" height="41" alt="imagen4" src="https://github.com/user-attachments/assets/ca5fe7bb-bd10-4c04-aacb-b700b08a71b1" />
 </p>
 
 ### **d)**
 Se configuró la red VLAN1 para cada switch asignándole la dirección IP y máscara según la tabla de ruteo.
 
 <p align="center">
-<img width="663" height="194" alt="imagen5a" src="https://github.com/user-attachments/assets/1ceb06d3-cccf-4d00-9404-c391340bec38" /> <img width="663" height="196" alt="imagen5b" src="https://github.com/user-attachments/assets/a0046339-325f-4785-bfde-9f491d060620" />
+<img width="663" height="194" alt="imagen5a" src="https://github.com/user-attachments/assets/18d6dc95-1ed3-4ae6-97e3-38829fb12e62" />
+<img width="663" height="196" alt="imagen5b" src="https://github.com/user-attachments/assets/2ca88fbc-353d-44da-92a9-6bd0d1acd874" />
 </p>
 
 ### **e)**
 Se utilizó `show ip interface brief` para identificar qué puertos estaban activos en cada switch y se verificó con la topografía.
 
 <p align="center">
-<img width="589" height="466" alt="imagen6" src="https://github.com/user-attachments/assets/b9f22324-2d7c-4fcb-b07c-ddc4b9d9ae99" />
-<img width="590" height="464" alt="imagen6b" src="https://github.com/user-attachments/assets/de00878f-6c91-42a6-860d-1c827de38e32" />
+<img width="589" height="466" alt="imagen6" src="https://github.com/user-attachments/assets/053f0a3c-934e-47d5-b6f7-31fdfdfd3017" />
+<img width="590" height="464" alt="imagen6b" src="https://github.com/user-attachments/assets/46f1260f-19b1-4f1e-a27f-aadb13891240" />
 </p>
 
 Tras verificar el estado de las interfaces, se seleccionaron las que no estaban en uso y fueron deshabilitadas, dejando activos únicamente los puertos necesarios.
 
 <p align="center">
-<img width="426" height="549" alt="imagen7a" src="https://github.com/user-attachments/assets/cecc7817-1dbc-49c0-b26d-4b325a8d13b5" />
-<img width="426" height="549" alt="imagen7bbb" src="https://github.com/user-attachments/assets/eef6f4f1-5bfa-4405-ad8f-d90a8d80d7a9" />
+<img width="426" height="549" alt="imagen7a" src="https://github.com/user-attachments/assets/3ab46117-2d18-4015-b0e0-1630f5ee501e" />
+<img width="425" height="546" alt="imagen7bbb" src="https://github.com/user-attachments/assets/692f9e47-2264-4528-b409-6ad9bf357af8" />
 </p>
 
 ### **f)**
 Finalmente, se guardaron los cambios realizados utilizando el comando `write memory`.
 
 <p align="center">
-<img width="762" height="111" alt="imagen8" src="https://github.com/user-attachments/assets/384775fb-cb6c-4cd2-93e2-539ab04ee5ed" />
+<img width="762" height="111" alt="imagen8" src="https://github.com/user-attachments/assets/a58842d7-51a3-4ed8-90fe-624778eff8ca" />
 </p>
 
 ### **g)**
 Se verificó la comunicación entre las computadoras usando pings.
 
 <p align="center">
-<img width="407" height="198" alt="imagen9" src="https://github.com/user-attachments/assets/eea5ca31-59e5-4567-9e41-db99b199441d" />
+<img width="407" height="198" alt="imagen9" src="https://github.com/user-attachments/assets/797a4a3d-4686-4063-b887-b2d6b88df1d3" />
 </p>
 
 ### **h)**
 Se crearon las VLAN 10, 20 y 99 en ambos switches, asignando los nombres `Laboratorio`, `Bar` y `Management` respectivamente.
 
 <p align="center">
-<img width="966" height="206" alt="imagen10" src="https://github.com/user-attachments/assets/aaa821d7-706c-4e46-b64b-44a1e207aa77" />
+<img width="966" height="206" alt="imagen10" src="https://github.com/user-attachments/assets/f2a0c34b-382b-4c8a-ba6c-e1255fba5a13" />
 </p>
 
 ### **i)**
@@ -169,28 +170,30 @@ Se crearon las VLAN 10, 20 y 99 en ambos switches, asignando los nombres `Labora
 Con el comando `show vlan brief` se visualizó la tabla de VLAN configuradas, donde se observó que la VLAN por defecto corresponde a la VLAN 1.
 
 <p align="center">
-<img width="660" height="330" alt="imagen11" src="https://github.com/user-attachments/assets/f6a0d034-7209-43cd-a63c-0b45fec00e63" />
+<img width="660" height="330" alt="imagen11" src="https://github.com/user-attachments/assets/f0946c73-42ac-421b-81db-c960ffb18d3f" />
 </p>
 
 ### **j)**
 Se configuró el puerto F0/6 del sw-1 en modo access y se lo asignó a la VLAN 10 para vincular la PC-A con la VLAN Laboratorio.
 
 <p align="center">
-<img width="506" height="122" alt="imagen12" src="https://github.com/user-attachments/assets/f2f2f6a9-a6ec-4712-ab1c-c7b3cd01ca3b" />
+<img width="506" height="122" alt="imagen12" src="https://github.com/user-attachments/assets/c3daeb17-ba92-4dc5-aa15-247fd403b722" />
+
 </p>
 
 ### **k)**
 Se retiró la dirección IP previamente asignada a la VLAN 1 y se configuró la interfaz VLAN 99 como nueva VLAN de administración.
 
 <p align="center">
-<img width="456" height="205" alt="imagen13" src="https://github.com/user-attachments/assets/a563b949-4665-4ff0-9758-70977b1c433f" />
+<img width="456" height="205" alt="imagen13" src="https://github.com/user-attachments/assets/35a8d005-dd65-439d-b8b9-ba51ffc6c317" />
 </p>
 
 ### **l)**
 Se ejecutaron los comandos `show vlan brief` y `show ip interface brief` para verificar la asignación de puertos a cada VLAN y el estado general de las interfaces. 
 
 <p align="center">
-<img width="667" height="300" alt="imagen15" src="https://github.com/user-attachments/assets/1c6cc503-4db1-4e1e-8ac3-511ce44ab51d" />
+<img width="667" height="300" alt="imagen15" src="https://github.com/user-attachments/assets/4a999b7b-f948-428e-a1e1-483b846ed096" />
+
 </p>
 
 Mediante `show vlan brief` se observó:
@@ -201,7 +204,8 @@ Mediante `show vlan brief` se observó:
 - Además se muestran las VLANS 1002-1005, que son las VLANs reservadas por Cisco, estas siempre aparecen en estado activa y no deben modificarse.
 
 <p align="center">
- <img width="584" height="472" alt="imagen16" src="https://github.com/user-attachments/assets/8773974f-3c54-4258-ac41-bb415f6ac062" />
+<img width="584" height="472" alt="imagen16" src="https://github.com/user-attachments/assets/9db65734-f19e-4d1d-8586-523ea82fe671" />
+
 </p>
 
 Al ejecutar `show ip interface brief` en el sw-1 aparecen:
@@ -216,14 +220,16 @@ Al ejecutar `show ip interface brief` en el sw-1 aparecen:
 Se configuró el sw-2 asociando la PC-B a VLAN 10 (laboratorio), se repitió la configuración de VLAN 99 y verificó la configuración con `show vlan brief`. 
 
 <p align="center">
-<img width="857" height="269" alt="imagen18" src="https://github.com/user-attachments/assets/c486eb36-9306-45c3-931b-c341ab6d26a6" />
+<img width="857" height="269" alt="imagen18" src="https://github.com/user-attachments/assets/30598610-f2a0-4209-adf4-6e7fb1f84fe7" />
+
 </p>
 
 ### **n)**
 Al hacer ping entre las PCs, se obtuvo lo siguiente:
 
 <p align="center">
-<img width="870" height="210" alt="imagen26" src="https://github.com/user-attachments/assets/dd7bdd39-e234-476c-8bf1-cbeef02f6c12" />
+<img width="1024" height="210" alt="imagen26" src="https://github.com/user-attachments/assets/23893c59-cfa9-4dd4-bbeb-09aa4d1020be" />
+
 </p>
 
 Aunque ambas estaban asociadas a la misma VLAN (laboratorio), la comunicación falló y en ambos casos se obtuvo como respuesta Request timed out. Debido a eso, se revisó la configuración de los switches con el comando show interfaces switchport y se observó que los puertos estaban funcionando en modo access.
@@ -233,15 +239,18 @@ El modo access, no etiqueta las tramas y solo transporta una única VLAN que por
 Para que se transporten todas las VLANs a través del enlace entre switches, es necesario configurarlos en modo trunk. Dicho modo permite que múltiples VLANs existan entre los switches y utiliza etiquetas 802.1Q para identificar a que VLAN pertenece cada trama. Para verificar esto, se reconfiguró cada switch y se probó nuevamente hacer pings entre las computadoras y switches.
 
 <p align="center">
-<img width="870" height="185" alt="imagen21" src="https://github.com/user-attachments/assets/5641013b-ff5d-4dfe-b6a9-b766c1535e9e" />
+<img width="870" height="185" alt="imagen21" src="https://github.com/user-attachments/assets/7ab99c9b-12d5-4b9d-9f9c-8fa6a37fbbaf" />
+
 </p>
 
 <p align="center">
-<img width="870" height="309" alt="imagen25" src="https://github.com/user-attachments/assets/ff0b9596-7df0-4ad1-8248-eadc95617c1f" />
+
+<img width="870" height="309" alt="imagen25" src="https://github.com/user-attachments/assets/1b45b61b-7f4f-4c4d-9212-f8cb1d748872" />
 </p>
 
 <p align="center">
-<img width="870" height="87" alt="imagen24" src="https://github.com/user-attachments/assets/024eb452-2588-44a0-94a8-6d0845c9cecc" />
+<img width="870" height="87" alt="imagen24" src="https://github.com/user-attachments/assets/6fd3f887-49e3-4f9d-a9db-8226d5849609" />
+
 </p>
 
 Ahora con el enlace trunk, la VLAN 10 del sw1 es la misma que la VLAN 10 del sw2, por lo que ya no estan aislados entre sí y las PCs pueden comunicarse correctamente. 
@@ -504,5 +513,10 @@ Ping statistics for 8.8.8.8:
 Approximate round trip times in milli-seconds:
     Minimum = 0ms, Maximum = 0ms, Average = 0ms
 ```
+---
 
+### Referencias
 
+[1] <https://www.ymant.com/blog/redes-wan-man-lan-y-pan/>  
+[2] <https://www.networkacademy.io/ccna/ethernet/vlan-concept>  
+[3] [Stallings - Comunicaciones y Redes de Computadores 7ed]
