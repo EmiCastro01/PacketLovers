@@ -181,6 +181,7 @@ La implementación del sistema distribuido basado en MQTT permitió analizar su 
 - [¿Qué es MQTT?](https://aws.amazon.com/es/what-is/mqtt/) 
 - [Patrón de diseño Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview?hl=es-419)  
 - [HiveMQ Cloud - Documentation](https://docs.hivemq.com/hivemq-cloud/quick-start-guide.html)
+- [Implementación del cliente y broker MQTT - PacketLovers](https://github.com/EmiCastro01/PacketLovers/tree/main/Lab5/TP5_MQTT_Workspace)
 
 
 
